@@ -4,8 +4,8 @@
 
 **Course:** IKB42603 Cloud Computing Security Essentials  
 **Lab:** Lab 0 - Environment Setup   
-**Name:** Muhammad Amirul Hakim Bin Walid
-**Student ID:** 52215124636
+**Name:** Muhammad Amirul Hakim Bin Walid  
+**Student ID:** 52215124636   
 **Date:** 28 July 2026  
 
 ## Objective
@@ -41,7 +41,11 @@ docker run --rm hello-world
 
 The Docker version check returned `Docker version 28.5.2+dfsg4`. The `docker run --rm hello-world` command also completed successfully. Its output confirms that the Docker client contacted the Docker daemon, downloaded the `hello-world` image, created a container, and streamed the expected **Hello from Docker!** message. Docker is therefore installed and functioning correctly.
 
-Evidence: [1.docker.png](evidence/1.docker.png) and [2. docker run.png](evidence/2.%20docker%20run.png)
+Evidence:  
+
+<img width="630" height="64" alt="1 docker" src="https://github.com/user-attachments/assets/c9248691-6692-4c6e-9b81-20d50001ce44" />  
+
+<img width="843" height="462" alt="2  docker run" src="https://github.com/user-attachments/assets/087f5af8-a249-428e-9607-0717dc7fee8e" />
 
 ## Step 2 — Install and verify AWS CLI v2
 
@@ -53,7 +57,9 @@ aws --version
 
 The command returned `aws-cli/2.36.9 Python/3.14.6 Linux/6.12.13-amd64`, verifying that AWS CLI v2 is installed and on `PATH`.
 
-Evidence: [3. aws cli.png](evidence/3.%20aws%20cli.png)
+Evidence:  
+
+<img width="614" height="59" alt="3  aws cli" src="https://github.com/user-attachments/assets/178102db-317e-4d63-b130-9de616fb4326" />
 
 ## Step 3 — Install and verify kind and kubectl
 
@@ -66,7 +72,11 @@ kubectl version --client
 
 The results confirm `kind v0.23.0` and a `kubectl` client at `v1.33.4`, with Kustomize `v5.5.0`. Both tools are therefore installed and available for Labs 1, 2, and 4.
 
-Evidence: [4. kind.png](evidence/4.%20kind.png) and [5. kubectl.png](evidence/5.%20kubectl.png)
+Evidence:  
+
+<img width="599" height="68" alt="4  kind" src="https://github.com/user-attachments/assets/3d53a9e5-c4ec-406a-9689-6b7c71e0e3be" />  
+
+<img width="510" height="85" alt="5  kubectl" src="https://github.com/user-attachments/assets/38fdf273-e4f2-48ab-bead-5f6d80674d2e" />
 
 ## Step 4 — Install and verify helper tools
 
@@ -83,7 +93,11 @@ oathtool --version
 docker run --rm aquasec/trivy image <image-name>
 ```
 
-Evidence: [6. openssl.png](evidence/6.%20openssl.png) and [7. oathool.png](evidence/7.%20oathool.png)
+Evidence:  
+
+<img width="569" height="64" alt="6  openssl" src="https://github.com/user-attachments/assets/60b0789a-a357-4647-9379-a66ef5fab0a4" />  
+
+<img width="631" height="179" alt="7  oathool" src="https://github.com/user-attachments/assets/b64d71a7-918b-4a6b-a875-c16c890b4d23" />
 
 ## Step 5 — Start LocalStack and confirm its health
 
@@ -103,7 +117,11 @@ curl http://localhost:4566/_localstack/health
 
 The returned JSON reports LocalStack Community edition `3.0.2` and lists services such as S3, IAM, Lambda, DynamoDB, EC2, CloudFormation, and STS as `available`. This verifies that LocalStack started successfully and is responding on the required local endpoint.
 
-Evidence: [8. localstack.png](evidence/8.%20localstack.png) and [9. check health.png](evidence/9.%20check%20health.png)
+Evidence:  
+
+<img width="656" height="71" alt="8  localstack" src="https://github.com/user-attachments/assets/14f47948-5196-481f-ba74-c984d8ed1a98" /> 
+
+<img width="927" height="203" alt="9  check health" src="https://github.com/user-attachments/assets/c7c6dfac-46b9-4d98-8a17-7392e26b86dc" />
 
 ## Step 6 — Create and verify the kind Kubernetes cluster
 
@@ -124,7 +142,11 @@ kubectl get nodes
 
 The Kubernetes control plane and CoreDNS were reachable at the local API endpoint. `kubectl get nodes` shows `ccse-control-plane` in `Ready` state, with role `control-plane` and Kubernetes version `v1.30.0`. This demonstrates that the cluster is operational.
 
-Evidence: [10. kubernetes cluster.png](evidence/10.%20kubernetes%20cluster.png) and [11. verify kubernetes cluster.png](evidence/11.%20verify%20kubernetes%20cluster.png)
+Evidence:  
+
+<img width="782" height="252" alt="10  kubernetes cluster" src="https://github.com/user-attachments/assets/ee64b82a-4752-406d-9913-0a980bf46f5c" />  
+
+<img width="924" height="210" alt="11  verify kubernetes cluster" src="https://github.com/user-attachments/assets/f52564fa-8b5a-4d27-9077-83a523de3521" />
 
 ## Step 7 — Configure AWS CLI for LocalStack and verify connectivity
 
@@ -150,7 +172,9 @@ aws $EP sts get-caller-identity
 
 The command returned LocalStack's expected dummy identity: user ID `AKIAIOSFODNN7EXAMPLE`, account `000000000000`, and ARN `arn:aws:iam::000000000000:root`. This confirms the CLI was directed to LocalStack, rather than attempting to contact real AWS.
 
-Evidence: [12. Configure AWS CLI for LocalStack.png](evidence/12.%20Configure%20AWS%20CLI%20for%20LocalStack.png)
+Evidence:  
+
+<img width="650" height="191" alt="12  Configure AWS CLI for LocalStack" src="https://github.com/user-attachments/assets/a7197913-652e-44e2-bf1e-0e0c7d56f844" />
 
 ## Pre-lab checklist
 
