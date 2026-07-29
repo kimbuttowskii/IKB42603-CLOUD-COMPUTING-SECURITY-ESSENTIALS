@@ -18,3 +18,7 @@ This repository contains all laboratory exercises completed throughout the cours
 | Week 3 | Lab 3 | `Lab3_Encryption_and_Key_Management` |
 | Week 4 | Lab 4 | `Lab4_Access_Control_and_Network_Security` |
 | Week 5 | Lab 5 | `Lab5_Monitoring_Logging_and_Incident_Detection` |
+
+## 📜 License
+
+This repository is intended for educational purposes only.
