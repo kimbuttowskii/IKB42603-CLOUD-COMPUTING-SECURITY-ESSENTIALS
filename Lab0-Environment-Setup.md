@@ -1,8 +1,18 @@
 # IKB42603 Lab 0 — Environment Setup Report
 
-## Purpose
+## Course Information
 
-This report records the local environment prepared for IKB42603 cloud-security labs. It follows the **Lab 0 Environment Setup Cheatsheet** and links each completed verification to the supplied evidence. The setup provides Docker, AWS CLI, a local Kubernetes cluster (kind), cryptographic/MFA helper tools, and LocalStack as a local AWS simulator.
+**Course:** IKB42603 Cloud Computing Security Essentials  
+**Lab:** Lab 0 - Environment Setup   
+**Name:** Muhammad Amirul Hakim Bin Walid
+**Student ID:** 52215124636
+**Date:** 28 July 2026  
+
+## Objective
+
+The objective of this setup is to prepare the local lab environment required before Lab 1. Based on the setup cheatsheet, the environment must support Docker, AWS CLI v2, kind, kubectl, OpenSSL, oathtool, LocalStack, and a local Kubernetes cluster.
+
+All services are intended to run locally. LocalStack is used as the local AWS simulator, and kind is used to run Kubernetes inside Docker.
 
 ## Platform used
 
