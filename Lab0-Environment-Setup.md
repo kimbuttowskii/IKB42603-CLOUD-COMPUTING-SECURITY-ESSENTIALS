@@ -119,9 +119,15 @@ The returned JSON reports LocalStack Community edition `3.0.2` and lists service
 
 Evidence:  
 
-<img width="656" height="71" alt="8  localstack" src="https://github.com/user-attachments/assets/14f47948-5196-481f-ba74-c984d8ed1a98" /> 
+<img width="656" height="71" alt="8  localstack" src="https://github.com/user-attachments/assets/14f47948-5196-481f-ba74-c984d8ed1a98" />  
 
-<img width="927" height="203" alt="9  check health" src="https://github.com/user-attachments/assets/c7c6dfac-46b9-4d98-8a17-7392e26b86dc" />
+Kali:  
+
+<img width="927" height="203" alt="9  check health" src="https://github.com/user-attachments/assets/c7c6dfac-46b9-4d98-8a17-7392e26b86dc" />  
+
+Windows:  
+
+<img width="1811" height="868" alt="window docker" src="https://github.com/user-attachments/assets/8430e219-d275-4f5a-bef9-2f16278ad474" />
 
 ## Step 6 — Create and verify the kind Kubernetes cluster
 
