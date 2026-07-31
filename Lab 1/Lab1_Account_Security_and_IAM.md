@@ -1,10 +1,14 @@
 # Lab 1: Account Security and IAM
 
-## Part A — Cloud Account Security and Identity Access Management
+## Course Information
 
-**Course:** IKB42603 — Cloud Computing Security  
-**Laboratory platform:** LocalStack with the AWS CLI  
-**Date evidenced:** 30–31 July 2026
+**Course:** IKB42603 Cloud Computing Security Essentials  
+**Lab:** IKB42603_Lab1_Account_Security_and_IAM  
+**Name:** Muhammad Amirul Hakim Bin Walid  
+**Student ID:** 52215124636   
+**Date:** 30 July 2026  
+
+## Part A — Cloud Account Security and Identity Access Management
 
 ## 1. Purpose
 
@@ -32,7 +36,21 @@ The returned account ID `000000000000` and ARN `arn:aws:iam::000000000000:root` 
 
 **Evidence:**
 
-![Evidence 1 — LocalStack endpoint variable](evidence/1.png)
+![Evidence 1 — LocalStack endpoint variable](evidence/1.png)  
+
+
+## Task 1: Map the Cloud Identity Landscape
+
+| Concept | AWS Term | Purpose |
+|---|---|---|
+| All-powerful owner | Root user | The original account owner with full control over all resources and billing. It should be protected and not used for daily administration. |
+| Human/app identity | IAM User | A named identity for a person, application or service that needs credentials to access cloud resources. |
+| Permission bundle | IAM Policy | A JSON permission document that defines which actions are allowed or denied on specific resources. |
+| Collection of users | IAM Group | A way to manage permissions for multiple users together by attaching policies to the group. |
+| Temporary identity | IAM Role | An identity that can be assumed temporarily to grant short-lived permissions without long-term user credentials. |
+
+
+## Task 2: Create a Least-Privilege Admin (Stop Using Root)  
 
 ## 3. IAM design implemented
 
@@ -142,7 +160,10 @@ aws $EP iam get-group --group-name Admins
 
 **Result:** The `Users` array contains `CloudAdmin_hakim`, and the returned group is `Admins`.
 
-![Evidence 7 — Admins membership verified](evidence/7.png)
+![Evidence 7 — Admins membership verified](evidence/7.png)  
+
+
+## Task 3: Enforce Least Privilege with a Scoped Policy  
 
 ### Step 8 — Create the analyst user
 
@@ -179,7 +200,10 @@ aws $EP iam list-attached-user-policies --user-name Analyst_hakim
 
 **Result:** The output lists only `AmazonS3ReadOnlyAccess`, matching the required analyst permission.
 
-![Evidence 10 — Analyst policy verified](evidence/10.png)
+![Evidence 10 — Analyst policy verified](evidence/10.png)  
+
+
+## Task 4: Credential Hygiene & Access Keys 
 
 ### Step 11 — Create an access key for the analyst
 
