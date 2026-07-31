@@ -12,7 +12,10 @@
 
 ## 1. Purpose
 
-This part of the laboratory implements a simple Identity and Access Management (IAM) design in a local AWS-compatible environment. The work demonstrates how identities, groups, managed policies, and access keys are created and checked using AWS CLI commands. The design separates a full-administration role from a read-only analyst role, which is a basic application of least privilege.
+This part of the laboratory implements a simple Identity and Access Management (IAM) design in a local AWS-compatible environment. The work demonstrates how identities, groups, managed policies, and access keys are created and checked using AWS CLI commands. The design separates a full-administration role from a read-only analyst role, which is a basic application of least privilege. This lab demonstrated account security and access control using two local platforms:
+
+- LocalStack IAM was used to simulate AWS IAM users, groups, policies and access keys.
+- Kubernetes RBAC was used to enforce real authorization decisions using roles and role bindings.
 
 ## 2. Environment and important conventions
 
