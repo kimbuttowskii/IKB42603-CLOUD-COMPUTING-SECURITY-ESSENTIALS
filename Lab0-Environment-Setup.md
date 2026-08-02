@@ -43,9 +43,9 @@ The Docker version check returned `Docker version 28.5.2+dfsg4`. The `docker run
 
 Evidence:  
 
-<img width="630" height="64" alt="1 docker" src="https://github.com/user-attachments/assets/c9248691-6692-4c6e-9b81-20d50001ce44" />  
+<img width="630" height="64" alt="1 docker" src="https://github.com/user-attachments/assets/757581c4-b9fc-4fb8-9378-d84dc083ba03" />  
 
-<img width="843" height="462" alt="2  docker run" src="https://github.com/user-attachments/assets/087f5af8-a249-428e-9607-0717dc7fee8e" />
+<img width="843" height="462" alt="2  docker run" src="https://github.com/user-attachments/assets/c406607c-9617-4486-a6b6-f63c4d6b28fc" />
 
 ## Step 2 — Install and verify AWS CLI v2
 
@@ -119,7 +119,7 @@ The returned JSON reports LocalStack Community edition `3.0.2` and lists service
 
 Evidence:  
 
-<img width="656" height="71" alt="8  localstack" src="https://github.com/user-attachments/assets/14f47948-5196-481f-ba74-c984d8ed1a98" />  
+<img width="656" height="71" alt="8  localstack" src="https://github.com/user-attachments/assets/570691d6-e1da-4401-aeec-1668414307c3" />
 
 Kali:  
 
@@ -180,18 +180,18 @@ The command returned LocalStack's expected dummy identity: user ID `AKIAIOSFODNN
 
 Evidence:  
 
-<img width="650" height="191" alt="12  Configure AWS CLI for LocalStack" src="https://github.com/user-attachments/assets/a7197913-652e-44e2-bf1e-0e0c7d56f844" />
+<img width="650" height="191" alt="12  Configure AWS CLI for LocalStack" src="https://github.com/user-attachments/assets/3081b80f-4eb4-4378-ba3e-dfe4d5ca35cc" />
 
 ## Pre-lab checklist
 
 | Checklist item from the guide | Status | Evidence |
 | --- | --- | --- |
-| Docker command prints a version | Complete | [Screenshot 1](https://github.com/user-attachments/assets/c9248691-6692-4c6e-9b81-20d50001ce44) |
-| `docker run --rm hello-world` works | Complete | [Screenshot 2](https://github.com/user-attachments/assets/087f5af8-a249-428e-9607-0717dc7fee8e) |
+| Docker command prints a version | Complete | [Screenshot 1](https://github.com/user-attachments/assets/757581c4-b9fc-4fb8-9378-d84dc083ba03)) |
+| `docker run --rm hello-world` works | Complete | [Screenshot 2](https://github.com/user-attachments/assets/c406607c-9617-4486-a6b6-f63c4d6b28fc) |
 | AWS CLI v2 prints a version | Complete | [Screenshot 3](https://github.com/user-attachments/assets/178102db-317e-4d63-b130-9de616fb4326) |
 | kind and kubectl client commands work | Complete | [Screenshots 4](https://github.com/user-attachments/assets/3d53a9e5-c4ec-406a-9689-6b7c71e0e3be) [Screenshots 5](https://github.com/user-attachments/assets/38fdf273-e4f2-48ab-bead-5f6d80674d2e) |
-| LocalStack starts and health endpoint responds | Complete | [Screenshots 8](https://github.com/user-attachments/assets/14f47948-5196-481f-ba74-c984d8ed1a98) [Screenshots 9](https://github.com/user-attachments/assets/7cedc523-3d16-416c-82c1-c79f33302a23)|
-| AWS STS works through LocalStack endpoint | Complete | [Screenshot 12](https://github.com/user-attachments/assets/a7197913-652e-44e2-bf1e-0e0c7d56f844) |
+| LocalStack starts and health endpoint responds | Complete | [Screenshots 8](https://github.com/user-attachments/assets/570691d6-e1da-4401-aeec-1668414307c3) [Screenshots 9](https://github.com/user-attachments/assets/7cedc523-3d16-416c-82c1-c79f33302a23)|
+| AWS STS works through LocalStack endpoint | Complete | [Screenshot 12](https://github.com/user-attachments/assets/3081b80f-4eb4-4378-ba3e-dfe4d5ca35cc) |
 | kind cluster starts and node is Ready | Complete | [Screenshots 10](https://github.com/user-attachments/assets/ee64b82a-4752-406d-9913-0a980bf46f5c) [Screenshots 11](https://github.com/user-attachments/assets/f52564fa-8b5a-4d27-9077-83a523de3521)|
 | Bash-compatible terminal is in use | Complete (Kali terminal shown) | All screenshots |
 
