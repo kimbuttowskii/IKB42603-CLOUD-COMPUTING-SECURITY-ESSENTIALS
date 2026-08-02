@@ -159,8 +159,8 @@ Evidence:
 The cheatsheet requires dummy credentials because LocalStack accepts arbitrary values. These one-time settings should be applied if not already configured:
 
 ```bash
-aws configure set aws_access_key_id test
-aws configure set aws_secret_access_key test
+aws configure set aws_access_key_id <key>
+aws configure set aws_secret_access_key <key>
 aws configure set region us-east-1
 ```
 
@@ -186,7 +186,7 @@ Evidence:
 
 | Checklist item from the guide | Status | Evidence |
 | --- | --- | --- |
-| Docker command prints a version | Complete | [Screenshot 1](https://github.com/user-attachments/assets/757581c4-b9fc-4fb8-9378-d84dc083ba03)) |
+| Docker command prints a version | Complete | [Screenshot 1](https://github.com/user-attachments/assets/757581c4-b9fc-4fb8-9378-d84dc083ba03) |
 | `docker run --rm hello-world` works | Complete | [Screenshot 2](https://github.com/user-attachments/assets/c406607c-9617-4486-a6b6-f63c4d6b28fc) |
 | AWS CLI v2 prints a version | Complete | [Screenshot 3](https://github.com/user-attachments/assets/178102db-317e-4d63-b130-9de616fb4326) |
 | kind and kubectl client commands work | Complete | [Screenshots 4](https://github.com/user-attachments/assets/3d53a9e5-c4ec-406a-9689-6b7c71e0e3be) [Screenshots 5](https://github.com/user-attachments/assets/38fdf273-e4f2-48ab-bead-5f6d80674d2e) |
