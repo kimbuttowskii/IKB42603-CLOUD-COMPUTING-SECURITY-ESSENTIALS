@@ -3,7 +3,7 @@
 ## Course Information
 
 **Course:** IKB42603 Cloud Computing Security Essentials  
-**Lab:** Lab 2: Secure Isolation and Multitenancy 
+**Lab:** Secure Isolation and Multitenancy  
 **Name:** Muhammad Amirul Hakim Bin Walid  
 **Student ID:** 52215124636   
 **Date:**  11 August 2026  
