@@ -255,4 +255,17 @@ Data remanence is residual information that remains recoverable after normal del
 - [x] Default-deny NetworkPolicy blocks cross-tenant traffic **verified before/after**.
 - [x] ResourceQuota limits `tenant-a` to five pods, 1 CPU request, and 512 MiB memory requests, reducing noisy-neighbour risk.
 - [x] Per-tenant secrets are unreadable by the `tenant-a:app-a` service account in `tenant-b` (`yes` for tenant-a; `no` for tenant-b).
-- [x] Data remanence and overwrite-before-delete were demonstrated; cryptographic erasure is identified as the preferred cloud control.
+- [x] Data remanence and overwrite-before-delete were demonstrated; cryptographic erasure is identified as the preferred cloud control.  
+
+## Cleanup
+
+After completing the lab and saving all evidence, the environment can be removed:  
+
+```bash
+kind delete cluster --name ccse-lab2
+docker volume rm ccse-vol
+```
+
+## Conclusion  
+
+This lab showed that secure multi-tenancy requires multiple isolation controls. Kubernetes namespaces provide logical separation, but they do not automatically enforce network isolation. ResourceQuota helps control shared compute capacity, NetworkPolicy enforces traffic segmentation, RBAC protects secrets, and secure deletion concepts help address data remanence risk in shared storage environments.
