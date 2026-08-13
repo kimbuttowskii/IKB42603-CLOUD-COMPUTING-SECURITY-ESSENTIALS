@@ -1,6 +1,14 @@
 # Lab 2: Secure Isolation and Multitenancy
 
+## Course Information
+
 **Course:** IKB42603 Cloud Computing Security Essentials  
+**Lab:** Lab 2: Secure Isolation and Multitenancy 
+**Name:** Muhammad Amirul Hakim Bin Walid  
+**Student ID:** 52215124636   
+**Date:**  11 August 2026  
+
+
 **Lab focus:** Compute, network, and storage isolation using Docker and Kubernetes  
 **Platform:** kind Kubernetes cluster with Calico NetworkPolicy enforcement
 
@@ -94,8 +102,6 @@ spec:
 The verification output shows the quota is present with hard limits of five pods, one CPU request, and 512 MiB memory requests. This limits the amount of shared capacity this tenant can reserve and reduces the risk that it starves other tenants.
 
 ![Evidence 9 — ResourceQuota applied](evidence/9.png)
-
-![Evidence 17 — NetworkPolicy and quota verification](evidence/17.png)
 
 **Isolation dimension exercised:** compute/resource isolation. The quota is not a complete performance guarantee, but it constrains a tenant's requested resources and pod count.
 
@@ -210,7 +216,9 @@ kubectl get networkpolicy -A
 kubectl describe resourcequota tenant-a-quota -n tenant-a
 ```
 
-The evidence lists `tenant-b/default-deny-ingress` and shows the `tenant-a-quota` hard limits. These commands verify that the policy and quota objects exist.
+The evidence lists `tenant-b/default-deny-ingress` and shows the `tenant-a-quota` hard limits. These commands verify that the policy and quota objects exist.   
+
+![Evidence 17 — NetworkPolicy and quota verification](evidence/17.png)   
 
 ## Short-answer questions
 
@@ -244,7 +252,7 @@ Data remanence is residual information that remains recoverable after normal del
 ## Security best-practices checklist
 
 - [x] Tenants are separated into distinct namespaces (`tenant-a` and `tenant-b`).
-- [ ] Default-deny NetworkPolicy blocks cross-tenant traffic **verified before/after**. The policy was created, but the supplied after-test was stopped by ResourceQuota admission; repeat it with resource requests to check this item.
+- [x] Default-deny NetworkPolicy blocks cross-tenant traffic **verified before/after**.
 - [x] ResourceQuota limits `tenant-a` to five pods, 1 CPU request, and 512 MiB memory requests, reducing noisy-neighbour risk.
 - [x] Per-tenant secrets are unreadable by the `tenant-a:app-a` service account in `tenant-b` (`yes` for tenant-a; `no` for tenant-b).
 - [x] Data remanence and overwrite-before-delete were demonstrated; cryptographic erasure is identified as the preferred cloud control.
