@@ -16,6 +16,12 @@
 
 This lab models two customers, `tenant-a` and `tenant-b`, on one Kubernetes cluster. It demonstrates that namespace separation alone is not sufficient to protect tenants. The lab first shows the default-open risk, then applies controls for resource, network, and secret isolation, and finally examines data remanence.
 
+## Lab Summary
+
+This lab demonstrates secure isolation in a multi-tenant cloud environment. Two tenants are represented using separate Kubernetes namespaces, `tenant-a` and `tenant-b`, running on the same shared cluster. The lab first shows that Kubernetes networking is open by default, then applies security controls such as ResourceQuota, NetworkPolicy and RBAC to enforce isolation.
+
+The lab also demonstrates data remanence in container storage by writing sensitive data into a Docker volume, deleting it normally, and comparing that with an overwrite-before-delete method.  
+
 ## Environment and policy-capable cluster
 
 A kind cluster called `ccse-lab2` was created with the default CNI disabled and pod CIDR `10.244.0.0/16`. Calico v3.27.0 was installed afterwards. This matters because a Kubernetes `NetworkPolicy` only has an effect when the selected CNI implements policy enforcement.
