@@ -1,7 +1,11 @@
-# Lab 3: Encryption and Key Management
+# Lab 3: Encryption and Key Management  
 
 **Course:** IKB42603 Cloud Computing Security Essentials  
-**Lab:** Data Protection — Encryption & Key Management  
+**Lab:**   
+**Name:** Muhammad Amirul Hakim Bin Walid  
+**Student ID:** 52215124636   
+**Date:**  20 August 2026  
+
 **Topics:** encryption at rest and in transit, KMS, envelope encryption, cryptographic erasure, integrity, and tamper-evident logs
 
 ## Objectives
