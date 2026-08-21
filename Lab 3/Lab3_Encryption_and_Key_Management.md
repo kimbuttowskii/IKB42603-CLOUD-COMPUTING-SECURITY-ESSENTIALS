@@ -460,7 +460,14 @@ This makes the log tamper-evident, rather than automatically tamper-proof: an at
 - [x] Data retrieved through TLS over HTTPS.
 - [x] Envelope encryption used; plaintext data-key files were removed after encryption.
 - [x] Separate tenant-A and tenant-B KMS keys created; a post-erasure decrypt attempt failed.
-- [x] Integrity checked with SHA-256 and a tamper-evident hash chain.
+- [x] Integrity checked with SHA-256 and a tamper-evident hash chain.  
+
+## Cleanup & Teardown 
+```bash
+docker stop tls 2>/dev/null  
+rm -f record.* private.pem public.pem key.pem cert.pem datakey.* tampered.txt  
+docker stop localstack && docker rm localstack   
+```
 
 ## Conclusion
 
