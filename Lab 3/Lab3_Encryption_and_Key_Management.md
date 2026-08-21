@@ -1,7 +1,7 @@
 # Lab 3: Encryption and Key Management  
 
 **Course:** IKB42603 Cloud Computing Security Essentials  
-**Lab:**   
+**Lab:**  Encryption and Key Management 
 **Name:** Muhammad Amirul Hakim Bin Walid  
 **Student ID:** 52215124636   
 **Date:**  20 August 2026  
@@ -34,39 +34,49 @@ Evidence screenshots are stored in the `evidence/` directory. Key identifiers an
    echo 'Patient: Ahmad, Diagnosis: confidential' > record.txt
    ```
 
-   Evidence: [1.png](evidence/1.png)
+   Evidence:
+   
+   ![1.png](evidence/1.png)
 
-2. Encrypted the record using AES-256-CBC with PBKDF2 key derivation and a random salt:
+3. Encrypted the record using AES-256-CBC with PBKDF2 key derivation and a random salt:
 
    ```bash
    openssl enc -aes-256-cbc -pbkdf2 -salt -in record.txt -out record.enc
    ```
 
-   A passphrase was entered and confirmed when prompted. Evidence: [2.png](evidence/2.png)
+   A passphrase was entered and confirmed when prompted. Evidence:  
 
-3. Displayed the encrypted file:
+   ![2.png](evidence/2.png)
+
+5. Displayed the encrypted file:
 
    ```bash
    cat record.enc
    ```
 
-   The displayed data begins with `Salted__` and is unreadable binary data, rather than the patient record. Evidence: [3.png](evidence/3.png)
+   The displayed data begins with `Salted__` and is unreadable binary data, rather than the patient record. Evidence:  
 
-4. Decrypted the ciphertext using the same passphrase:
+   ![3.png](evidence/3.png)
+
+7. Decrypted the ciphertext using the same passphrase:
 
    ```bash
    openssl enc -d -aes-256-cbc -pbkdf2 -in record.enc -out record.dec.txt
    ```
 
-   Evidence: [4.png](evidence/4.png)
+   Evidence:  
 
-5. Compared the original and recovered files:
+   ![4.png](evidence/4.png)
+
+9. Compared the original and recovered files:
 
    ```bash
    diff record.txt record.dec.txt && echo 'MATCH: decryption successful'
    ```
 
-   The terminal returned `MATCH: decryption successful`, proving correct recovery. Evidence: [5.png](evidence/5.png)
+   The terminal returned `MATCH: decryption successful`, proving correct recovery. Evidence:  
+
+   ![5.png](evidence/5.png)
 
 ### Result
 
@@ -84,47 +94,59 @@ AES-256-CBC protected the record at rest. The ciphertext was not human-readable,
    openssl genrsa -out private.pem 2048
    ```
 
-   Evidence: [6.png](evidence/6.png)
+   Evidence:  
 
-2. Derived the matching public key:
+   ![6.png](evidence/6.png)
+
+3. Derived the matching public key:
 
    ```bash
    openssl rsa -in private.pem -pubout -out public.pem
    ```
 
-   Evidence: [7.png](evidence/7.png)
+   Evidence:  
 
-3. Encrypted the record with the public key:
+   ![7.png](evidence/7.png)
+
+5. Encrypted the record with the public key:
 
    ```bash
    openssl pkeyutl -encrypt -pubin -inkey public.pem -in record.txt -out record.rsa
    ```
 
-   Evidence: [8.png](evidence/8.png)
+   Evidence:  
 
-4. Decrypted the RSA ciphertext with the private key:
+   ![8.png](evidence/8.png)
+
+7. Decrypted the RSA ciphertext with the private key:
 
    ```bash
    openssl pkeyutl -decrypt -inkey private.pem -in record.rsa -out record.rsa.txt
    ```
 
-   Evidence: [9.png](evidence/9.png)
+   Evidence:  
 
-5. Signed the original record with the private key, using SHA-256:
+   ![9.png](evidence/9.png)
+
+9. Signed the original record with the private key, using SHA-256:
 
    ```bash
    openssl dgst -sha256 -sign private.pem -out record.sig record.txt
    ```
 
-   The final verification evidence is included in [24.png](evidence/24.png).
+   The final verification evidence is included in  
 
-6. Verified the signature with the public key:
+   ![24.png](evidence/24.png).
+
+11. Verified the signature with the public key:
 
    ```bash
    openssl dgst -sha256 -verify public.pem -signature record.sig record.txt
    ```
 
-   The output was `Verified OK`. Evidence: [24.png](evidence/24.png)
+   The output was `Verified OK`. Evidence:   
+   
+   ![24.png](evidence/24.png)
 
 ### Result
 
@@ -154,15 +176,19 @@ The public key can encrypt data intended for the private-key holder; only the pr
      -v "$(pwd)/record.txt:/usr/share/nginx/html/record.txt" nginx
    ```
 
-   Docker downloaded and started the Nginx image. Evidence: [10.png](evidence/10.png)
+   Docker downloaded and started the Nginx image. Evidence:  
 
-3. Retrieved the record over HTTPS, accepting the self-signed certificate for this lab:
+   ![10.png](evidence/10.png)
+
+4. Retrieved the record over HTTPS, accepting the self-signed certificate for this lab:
 
    ```bash
    curl -k https://localhost:8443/record.txt
    ```
 
-   The record was returned successfully. Evidence: [11.png](evidence/11.png)
+   The record was returned successfully. Evidence:  
+
+   ![11.png](evidence/11.png)
 
 ### Result
 
@@ -180,24 +206,30 @@ The application data was delivered through a TLS channel. Although `-k` bypasses
    EP='--endpoint-url=http://localhost:4566'
    ```
 
-   Evidence: [12.png](evidence/12.png)
+   Evidence:  
 
-2. Created the tenant-A customer-managed KMS key:
+   ![12.png](evidence/12.png)
+
+3. Created the tenant-A customer-managed KMS key:
 
    ```bash
    aws $EP kms create-key --description 'CCSE tenant-A master key'
    ```
 
-   The response showed an enabled, symmetric KMS key for `ENCRYPT_DECRYPT`. The KeyId was saved as `KEY_A` but is redacted in the evidence/report. Evidence: [12.png](evidence/12.png) and [13.png](evidence/13.png)
+   The response showed an enabled, symmetric KMS key for `ENCRYPT_DECRYPT`. The KeyId was saved as `KEY_A` but is redacted in the evidence/report. Evidence:  
+   ![12.png](evidence/12.png)  
+   ![13.png](evidence/13.png)  
 
-3. Used the tenant-A KMS key to encrypt the small plaintext `hello`:
+5. Used the tenant-A KMS key to encrypt the small plaintext `hello`:
 
    ```bash
    aws $EP kms encrypt --key-id $KEY_A --plaintext "$(echo -n 'hello' | base64)" \
      --query CiphertextBlob --output text
    ```
 
-   KMS returned a Base64 ciphertext blob. Evidence: [14.png](evidence/14.png)
+   KMS returned a Base64 ciphertext blob. Evidence:  
+
+   ![14.png](evidence/14.png)
 
 ### Result
 
@@ -216,33 +248,41 @@ The KMS key is the key-encrypting key (master key) used to protect small secrets
      --query '[Plaintext,CiphertextBlob]' --output text
    ```
 
-   The output contained two values: a plaintext data key and its KMS-wrapped ciphertext copy. Evidence: [15.png](evidence/15.png)
+   The output contained two values: a plaintext data key and its KMS-wrapped ciphertext copy. Evidence:  
 
-2. Saved the plaintext value as `datakey.b64` and the wrapped value as `datakey.enc`, then decoded the plaintext data key locally:
+   ![15.png](evidence/15.png)  
+
+3. Saved the plaintext value as `datakey.b64` and the wrapped value as `datakey.enc`, then decoded the plaintext data key locally:
 
    ```bash
    base64 -d datakey.b64 > datakey.bin
    ```
 
-   Evidence: [16.png](evidence/16.png)
+   Evidence:  
 
-3. Encrypted `record.txt` locally with the plaintext data key:
+   ![16.png](evidence/16.png)  
+
+5. Encrypted `record.txt` locally with the plaintext data key:
 
    ```bash
    openssl enc -aes-256-cbc -pbkdf2 -in record.txt -out record.env.enc \
      -pass file:./datakey.bin
    ```
 
-   Evidence: [17.png](evidence/17.png)
+   Evidence:  
+    
+   ![17.png](evidence/17.png)   
 
-4. Destroyed the on-disk plaintext key material:
+7. Destroyed the on-disk plaintext key material:
 
    ```bash
    rm datakey.bin datakey.b64
    echo 'Only the KMS-wrapped data key (datakey.enc) remains.'
    ```
 
-   The confirmation states that only `datakey.enc`, the wrapped data key, remains. Evidence: [18.png](evidence/18.png)
+   The confirmation states that only `datakey.enc`, the wrapped data key, remains. Evidence:  
+
+   ![18.png](evidence/18.png)  
 
 ### Result
 
@@ -261,32 +301,40 @@ The KMS key is the key-encrypting key (master key) used to protect small secrets
    KEY_B=<tenant-B-KeyId>
    ```
 
-   The output shows a separate enabled symmetric key with the description `CCSE tenant-B master key`. Evidence: [19.png](evidence/19.png)
+   The output shows a separate enabled symmetric key with the description `CCSE tenant-B master key`. Evidence:  
 
-2. Scheduled tenant A's key for deletion with the minimum seven-day window:
+   ![19.png](evidence/19.png)  
+
+3. Scheduled tenant A's key for deletion with the minimum seven-day window:
 
    ```bash
    aws $EP kms schedule-key-deletion --key-id $KEY_A --pending-window-in-days 7
    ```
 
-   The response reported `KeyState: PendingDeletion` and `PendingWindowInDays: 7`. Evidence: [20.png](evidence/20.png)
+   The response reported `KeyState: PendingDeletion` and `PendingWindowInDays: 7`. Evidence:  
 
-3. The evidence then cancels the deletion and disables the tenant-A key:
+   ![20.png](evidence/20.png)  
+
+5. The evidence then cancels the deletion and disables the tenant-A key:
 
    ```bash
    aws $EP kms cancel-key-deletion --key-id $KEY_A
    aws $EP kms disable-key --key-id $KEY_A
    ```
 
-   Evidence: [21.png](evidence/21.png)
+   Evidence:  
 
-4. Attempted to decrypt the wrapped data key:
+   ![21.png](evidence/21.png)  
+
+7. Attempted to decrypt the wrapped data key:
 
    ```bash
    aws $EP kms decrypt --ciphertext-blob fileb://datakey.enc 2>&1 | head -3
    ```
 
-   The operation failed. The captured error is `InvalidCiphertextException`: LocalStack was unable to deserialize the ciphertext blob. Evidence: [22.png](evidence/22.png)
+   The operation failed. The captured error is `InvalidCiphertextException`: LocalStack was unable to deserialize the ciphertext blob. Evidence:  
+
+   ![22.png](evidence/22.png)  
 
 ### Result and interpretation
 
@@ -312,9 +360,11 @@ The screenshot conclusively demonstrates a failed decryption attempt, but its ex
    9345a32351cc1ad03e8b318059b753da6cd4e325688da97a01599b32bc945dd5  record.txt
    ```
 
-   Evidence: [23.png](evidence/23.png)
+   Evidence:  
 
-2. Created a copy, appended `x`, and recalculated both hashes:
+   ![23.png](evidence/23.png)  
+
+3. Created a copy, appended `x`, and recalculated both hashes:
 
    ```bash
    cp record.txt tampered.txt; echo 'x' >> tampered.txt
@@ -328,9 +378,11 @@ The screenshot conclusively demonstrates a failed decryption attempt, but its ex
    8c8afc8a0364425ab38ef90213102c638a82f756bd7187a03b306c5683065eb7  tampered.txt
    ```
 
-   Evidence: [23.png](evidence/23.png)
+   Evidence:  
 
-3. Built a three-entry hash chain, starting with `PREV=0`:
+   ![23.png](evidence/23.png)  
+
+5. Built a three-entry hash chain, starting with `PREV=0`:
 
    ```bash
    PREV=0
@@ -348,16 +400,20 @@ The screenshot conclusively demonstrates a failed decryption attempt, but its ex
    export data | e1470ccfaf43dcab3c17d5710dc9eacbb7ac65c9f522ca98c2c503431b32da68
    ```
 
-   Evidence: [23.png](evidence/23.png)
+   Evidence:  
 
-4. Performed the final verification command:
+   ![23.png](evidence/23.png)  
+
+7. Performed the final verification command:
 
    ```bash
    aws --endpoint-url=http://localhost:4566 kms list-keys
    openssl dgst -sha256 -verify public.pem -signature record.sig record.txt
    ```
 
-   The signature still returned `Verified OK`. The KMS list showed no active keys at that point. Evidence: [24.png](evidence/24.png)
+   The signature still returned `Verified OK`. The KMS list showed no active keys at that point. Evidence:  
+
+   ![24.png](evidence/24.png)  
 
 ### Result
 
