@@ -37,9 +37,11 @@ HTTP Basic authentication was used to ensure that only a caller presenting valid
    docker run --rm httpd:alpine htpasswd -nbB student '<lab-password>' > htpasswd.txt
    ```
 
-   The command downloaded the `httpd:alpine` image and created the password file successfully ([Evidence 1](evidence/1.png)).
+   The command downloaded the `httpd:alpine` image and created the password file successfully
+   
+   ![Evidence 1](evidence/1.png)
 
-2. Create an Nginx configuration that protects `/` with Basic authentication and uses `/etc/nginx/.htpasswd` as the credential store.
+3. Create an Nginx configuration that protects `/` with Basic authentication and uses `/etc/nginx/.htpasswd` as the credential store.
 
    ```nginx
    server {
@@ -52,9 +54,11 @@ HTTP Basic authentication was used to ensure that only a caller presenting valid
    }
    ```
 
-   The configuration was created as `default.conf` ([Evidence 2](evidence/2.png)).
+   The configuration was created as `default.conf`
+   
+   ![Evidence 2](evidence/2.png)
 
-3. Run Nginx, bind host port `8080` to port `80`, and mount both configuration files read-only from the working directory.
+5. Run Nginx, bind host port `8080` to port `80`, and mount both configuration files read-only from the working directory.
 
    ```bash
    docker run --rm -d --name authsvc -p 8080:80 \
@@ -62,23 +66,29 @@ HTTP Basic authentication was used to ensure that only a caller presenting valid
      -v $(pwd)/htpasswd.txt:/etc/nginx/.htpasswd nginx
    ```
 
-   The `authsvc` container started ([Evidence 3](evidence/3.png)).
+   The `authsvc` container started  
+   
+    ![Evidence 3](evidence/3.png)
 
-4. Test access without credentials.
+7. Test access without credentials.
 
    ```bash
    curl -s -o /dev/null -w 'no-creds: %{http_code}\n' http://localhost:8080
    ```
 
-   **Result:** `no-creds: 401` ([Evidence 4](evidence/4.png)). The server rejected the unauthenticated request.
+   **Result:** `no-creds: 401`. The server rejected the unauthenticated request.  
 
-5. Test access with the valid lab credentials.
+   ![Evidence 4](evidence/4.png)
+
+9. Test access with the valid lab credentials.
 
    ```bash
    curl -s -u student:'<lab-password>' http://localhost:8080
    ```
 
-   **Result:** `Authenticated OK` ([Evidence 5](evidence/5.png)), which corresponds to HTTP 200.
+   **Result:** `Authenticated OK`, which corresponds to HTTP 200.
+   
+   ![Evidence 5](evidence/5.png)
 
 ### Security outcome
 
@@ -101,17 +111,21 @@ This task adds a time-based one-time password (TOTP), representing a second fact
    echo "Enrol this secret in an authenticator app: $SECRET"
    ```
 
-   A secret was generated and enrolment information displayed ([Evidence 6](evidence/6.png)).
+   A secret was generated and enrolment information displayed
+   
+   ![Evidence 6](evidence/6.png)
 
-2. Generate the current six-digit TOTP value.
+3. Generate the current six-digit TOTP value.
 
    ```bash
    oathtool --totp -b "$SECRET"
    ```
 
-   The code-generation command was run ([Evidence 7](evidence/7.png)).
+   The code-generation command was run  
 
-3. Validate an entered code against the current expected TOTP.
+   ![Evidence 7](evidence/7.png)
+
+5. Validate an entered code against the current expected TOTP.
 
    ```bash
    read -p 'Enter the 6-digit code: ' CODE
@@ -123,7 +137,13 @@ This task adds a time-based one-time password (TOTP), representing a second fact
    fi
    ```
 
-4. A mismatching/expired code produced `MFA FAILED` ([Evidence 8](evidence/8.png)). A valid current code subsequently produced **`MFA OK`** ([Evidence 9](evidence/9.png)).
+6. A mismatching/expired code produced `MFA FAILED`  
+
+   ![Evidence 8](evidence/8.png)  
+
+   A valid current code subsequently produced **`MFA OK`**  
+
+   ![Evidence 9](evidence/9.png)
 
 ### Security outcome
 
@@ -147,9 +167,11 @@ RBAC applies least privilege to an authenticated Kubernetes service account: it 
    kubectl create serviceaccount dev -n app
    ```
 
-   The cluster, namespace, and service account were created ([Evidence 10](evidence/10.png)).
+   The cluster, namespace, and service account were created  
 
-2. Create a Role restricted to `get` and `list` verbs on `pods`, then bind it to the service account.
+   ![Evidence 10](evidence/10.png)
+
+3. Create a Role restricted to `get` and `list` verbs on `pods`, then bind it to the service account.
 
    ```bash
    kubectl create role dev-role -n app --verb=get,list --resource=pods
@@ -157,9 +179,11 @@ RBAC applies least privilege to an authenticated Kubernetes service account: it 
      --role=dev-role --serviceaccount=app:dev
    ```
 
-   The role and role binding were created ([Evidence 11](evidence/11.png)).
+   The role and role binding were created
+   
+   ![Evidence 11](evidence/11.png)
 
-3. Test the permissions as the service account.
+5. Test the permissions as the service account.
 
    ```bash
    SA=system:serviceaccount:app:dev
@@ -174,7 +198,9 @@ RBAC applies least privilege to an authenticated Kubernetes service account: it 
    | Create deployment | `no` | Not granted to this role |
    | Delete pods | `no` | Not granted to this role |
 
-   All three results are captured in [Evidence 12](evidence/12.png).
+   All three results are captured in this screenshot  
+
+   ![Evidence 12](evidence/12.png).
 
 ### Verification command
 
@@ -201,9 +227,11 @@ Separate the internet-facing web tier, application tier, and database tier so th
    docker network create backend-net
    ```
 
-   Both networks were created ([Evidence 13](evidence/13.png)).
+   Both networks were created  
 
-2. Attach the database only to `backend-net`; attach the application to `backend-net` and then `frontend-net`; attach the web container only to `frontend-net`.
+   ![Evidence 13](evidence/13.png)
+
+3. Attach the database only to `backend-net`; attach the application to `backend-net` and then `frontend-net`; attach the web container only to `frontend-net`.
 
    ```bash
    docker run -d --name db --network backend-net redis:alpine
@@ -212,9 +240,11 @@ Separate the internet-facing web tier, application tier, and database tier so th
    docker run -d --name web --network frontend-net nginx
    ```
 
-   The containers and network attachment were created ([Evidence 14](evidence/14.png)).
+   The containers and network attachment were created  
 
-3. Test the prohibited frontend-to-database route.
+   ![Evidence 14](evidence/14.png)
+
+5. Test the prohibited frontend-to-database route.
 
    ```bash
    docker exec web sh -c 'apk add -q curl; curl -s -m 3 db:6379 || echo BLOCKED'
@@ -222,13 +252,15 @@ Separate the internet-facing web tier, application tier, and database tier so th
 
    **Expected result:** `BLOCKED`, because `web` and `db` do not share a Docker network.
 
-4. Test the permitted application-to-database route.
+6. Test the permitted application-to-database route.
 
    ```bash
    docker exec app sh -c 'apk add -q curl; nc -z -w3 db 6379 && echo REACHABLE'
    ```
 
-   **Observed result:** the connection to `db` on TCP/6379 succeeded and printed **`REACHABLE`** ([Evidence 15](evidence/15.png)).
+   **Observed result:** the connection to `db` on TCP/6379 succeeded and printed **`REACHABLE`**   
+
+   ![Evidence 15](evidence/15.png)
 
 ### Evidence note
 
@@ -256,7 +288,9 @@ Model a cloud security group with a deny-by-default inbound policy and only the 
      iptables -L INPUT -n'
    ```
 
-3. The displayed ruleset had **INPUT policy `DROP`**, plus an `ACCEPT` rule for TCP destination port 443 and an `ACCEPT` rule for all loopback traffic ([Evidence 16](evidence/16.png)).
+3. The displayed ruleset had **INPUT policy `DROP`**, plus an `ACCEPT` rule for TCP destination port 443 and an `ACCEPT` rule for all loopback traffic  
+
+   ![Evidence 16](evidence/16.png)
 
 ### Security outcome
 
@@ -284,17 +318,21 @@ Reduce the container’s privilege and writable attack surface, then check the c
      nginxinc/nginx-unprivileged
    ```
 
-   The hardened container started from `nginxinc/nginx-unprivileged` ([Evidence 17](evidence/17.png)).
+   The hardened container started from `nginxinc/nginx-unprivileged`  
 
-2. Inspect the configuration.
+   ![Evidence 17](evidence/17.png)
+
+3. Inspect the configuration.
 
    ```bash
    docker inspect hardened --format 'User={{.Config.User}} ReadOnly={{.HostConfig.ReadonlyRootfs}}'
    ```
 
-   **Observed result:** `User=1000:1000` and `ReadOnly=true` ([Evidence 18](evidence/18.png)).
+   **Observed result:** `User=1000:1000` and `ReadOnly=true`  
+   
+   ![Evidence 18](evidence/18.png)
 
-3. Verify that all capabilities were dropped.
+5. Verify that all capabilities were dropped.
 
    ```bash
    docker inspect hardened --format '{{json .HostConfig.CapDrop}}'
@@ -302,13 +340,17 @@ Reduce the container’s privilege and writable attack surface, then check the c
 
    Expected result: an entry containing `ALL`.
 
-4. Scan the Nginx Alpine image for known high and critical vulnerabilities.
+6. Scan the Nginx Alpine image for known high and critical vulnerabilities.
 
    ```bash
    docker run --rm aquasec/trivy image --severity HIGH,CRITICAL nginx:alpine
    ```
 
-   Trivy completed its database download and reported `0` vulnerabilities for `nginx:alpine (alpine 3.24.1)` in the captured scan summary ([Evidence 19](evidence/19.png), [Evidence 20](evidence/20.png)).
+   Trivy completed its database download and reported `0` vulnerabilities for `nginx:alpine (alpine 3.24.1)` in the captured scan summary
+   
+   ![Evidence 19](evidence/19.png)  
+   
+   ![Evidence 20](evidence/20.png)  
 
 ### Hardening measures and attacks mitigated
 
@@ -358,13 +400,15 @@ The applied measures are: non-root execution (`1000:1000`) to reduce privilege a
 
 ## Cleanup and teardown
 
-The lab environment was cleaned up with the following commands, as captured in [Evidence 21](evidence/21.png):
+The lab environment was cleaned up with the following commands, as captured in :  
 
 ```bash
 docker rm -f authsvc db app web hardened 2>/dev/null
 docker network rm frontend-net backend-net 2>/dev/null
 kind delete cluster --name ccse-lab4
 ```
+
+![Evidence 21](evidence/21.png)  
 
 This removed the containers, Docker networks, and the `ccse-lab4` Kind cluster.
 
