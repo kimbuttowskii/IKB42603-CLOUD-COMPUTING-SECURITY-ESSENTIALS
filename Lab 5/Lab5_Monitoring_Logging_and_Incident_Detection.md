@@ -10,7 +10,17 @@
 
 ## Aim
 
-This lab implemented a small monitoring and incident-response workflow. Authentication activity was recorded, sent to a central CloudWatch Logs service, queried for suspicious behaviour, protected with a hash chain, correlated into an incident alert, contained, and preserved as integrity-checked evidence.
+This lab implemented a small monitoring and incident-response workflow. Authentication activity was recorded, sent to a central CloudWatch Logs service, queried for suspicious behaviour, protected with a hash chain, correlated into an incident alert, contained, and preserved as integrity-checked evidence.  
+
+## Lab Objectives
+
+This lab demonstrates how to:
+
+1. Generate and centralise application logs.
+2. Query security-relevant activity.
+3. Make logs tamper-evident with a hash chain.
+4. Correlate multiple events to detect an incident.
+5. Contain the simulated threat and preserve evidence with an integrity hash.  
 
 ## Lab evidence used
 
