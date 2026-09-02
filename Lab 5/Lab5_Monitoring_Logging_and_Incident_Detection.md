@@ -1,8 +1,12 @@
 # Lab 5: Monitoring, Logging and Incident Detection
 
-**Course:** IKB42603 Cloud Computing Security Essentials  
-**Lab:** 5 (Weeks 9–10)  
-**Environment:** Kali Linux shell, Docker, LocalStack, AWS CLI v2, CloudWatch Logs emulation
+**Course:** IKB42603 Cloud Computing Security Essentials   
+**Lab:**  Monitoring Logging and Incident Detection  
+**Name:** Muhammad Amirul Hakim Bin Walid  
+**Student ID:** 52215124636    
+**Date:** 1 Sept 2026  
+
+**Environment:** Kali Linux shell, Docker, LocalStack, AWS CLI v2, CloudWatch Logs emulation  
 
 ## Aim
 
@@ -266,7 +270,11 @@ aws --endpoint-url=http://localhost:4566 logs describe-log-groups
 sha256sum -c evidence.sha256
 ```
 
-The first command returned the `/ccse/app` log group (evidence `14.png`). The second returned `evidence_20260901.log: OK` (evidence `13.png`).
+The first command returned the `/ccse/app` log group (evidence `14.png`). The second returned `evidence_20260901.log: OK` (evidence `13.png`).  
+
+![](evidence/13.png)  
+
+![](evidence/14.png)  
 
 ## Security best-practices checklist
 
