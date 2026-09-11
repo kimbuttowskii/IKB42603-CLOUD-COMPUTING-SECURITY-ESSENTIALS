@@ -2,7 +2,11 @@
 
 **Course:** IKB42603 Cloud Security  
 **Platform:** Amazon S3 API on LocalStack  
-**Lab scope:** bucket exposure, access policies, SSE-KMS, delegated access, versioning, lifecycle management, and cryptographic erasure.
+**Lab scope:** bucket exposure, access policies, SSE-KMS, delegated access, versioning, lifecycle management, and cryptographic erasure.  
+**Lab:**  Object_Storage_and_Data_Lifecycle  
+**Name:** Muhammad Amirul Hakim Bin Walid  
+**Student ID:** 52215124636    
+**Date:** 10 Sept 2026  
 
 ## Objective
 
